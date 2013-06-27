@@ -1,0 +1,31 @@
+Partlist
+
+Exported from xmegaboard.sch at 1/30/2012 1:30:07 PM
+
+EAGLE Version 6.1.0 Copyright (c) 1988-2012 CadSoft
+
+Assembly variant: 
+
+Part     Value          Device           Package           Library             Sheet
+
+C1       10 uF          CAP0603-CAP      0603-CAP          SparkFun            1
+C2       470nf          CAP0603-CAP      0603-CAP          SparkFun            1
+C3       10nf           CAP0603-CAP      0603-CAP          SparkFun            1
+C4       0.22uf         CAP0603-CAP      0603-CAP          SparkFun            1
+C5       100uF          CAP0603-CAP      0603-CAP          SparkFun            1
+C6       10uF           CAP0603-CAP      0603-CAP          SparkFun            1
+C7       0.1 uF         CAP0603-CAP      0603-CAP          SparkFun            1
+C9       4.7uf          CAP0603-CAP      0603-CAP          SparkFun            1
+C12      100 nF         CAP0603-CAP      0603-CAP          SparkFun            1
+
+ESC1                    M03PTH           1X03              SparkFun            1
+ESC2                    M03PTH           1X03              SparkFun            1
+ESC3                    M03PTH           1X03              SparkFun            1
+ESC4                    M03PTH           1X03              SparkFun            1
+JP1      M05X2PTH       M05X2PTH         AVR_ICSP          SparkFun            1
+LED1                    LED0603          LED-0603          SparkFun            1
+PDI                     MA03-2           MA03-2            con-lstb            1
+SERVO1                  M03PTH           1X03              SparkFun            1
+SERVO2                  M03PTH           1X03              SparkFun            1
+SV2                     MA08-1           MA08-1            con-lstb            1
+
