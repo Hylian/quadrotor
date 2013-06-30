@@ -97,21 +97,12 @@
 
 #define CC1101_PACKT_LEN   (CC1101_FIFO_SIZE - 3) // see section 15.3 of the datasheet
 
-status_code CCRead(byte addr, byte* data);
-status_code CCReadBurst(byte addr, byte* dataPtr, byte dataCount);
-status_code CCWrite(byte addr, byte data);
-status_code CCWriteBurst(byte addr, const byte* dataPtr, byte dataCount);
-status_code CCStrobe(byte addr);
-
-//power on reset as discribed in  27.1 of cc1100 datasheet
-void PowerOnStartUp();
-
-//configure registers of cc1100 making it work in specific mode
-void Setup(byte configId);
-void ReadSetup(void);
-// set power amplification using a table
-void setPA(byte configId, byte paIndex );
-// switch radio mode
-void Mode(byte);
-// decode RSSI value
-byte RSSIdecode(byte rssiEnc);
+void PowerOnStartUp(); // manual power on reset as described in  27.1 of cc1100 datasheet
+void CCRead(char addr, char* data)
+status_code CCReadBurst(char addr, char* dataPtr, char size)
+void CCWrite(char addr, char data)
+status_code CCWriteBurst(char addr, const char* dataPtr, char size)
+void CCStrobe(char addr)
+void CCSetup() // configure registers
+void CCsetPA(char paIndex) // set power amplification using a table
+char CCRSSIdecode(char rssiEnc) // decode RSSI value
