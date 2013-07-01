@@ -3,10 +3,10 @@
 #include "SPICfg.h"
 
 //http://asf.atmel.com/docs/3.8.1/xmegaa/html/group__xmega__spi__master__group.html
+//Functions need to be modified to be full duplex so we can receive the stat byte
 
 void CCRead(char addr, char* data)
 {
-	status_code result;
 	char
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
@@ -15,9 +15,9 @@ void CCRead(char addr, char* data)
 	spi_deselect_device(&SPIC, &spi_device_conf);
 };
 
-status_code CCReadBurst(char addr, char* dataPtr, char size)
+status_code_t CCReadBurst(char addr, char* dataPtr, char size)
 {
-	status_code result;
+	status_code_t result;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	spi_write_single(&SPIC, addr|0xC0);
@@ -28,7 +28,6 @@ status_code CCReadBurst(char addr, char* dataPtr, char size)
 
 void CCWrite(char addr, char data)
 {
-	status_code result;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	spi_write_single(&SPIC, addr);
@@ -36,9 +35,9 @@ void CCWrite(char addr, char data)
 	spi_deselect_device(&SPIC, &spi_device_conf);
 }
 
-status_code CCWriteBurst(char addr, const char* dataPtr, char size)
+status_code_t CCWriteBurst(char addr, const char* dataPtr, char size)
 {
-	char result;
+	status_code_t result;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	spi_write_single(&SPIC, addr|0x40);
@@ -49,7 +48,6 @@ status_code CCWriteBurst(char addr, const char* dataPtr, char size)
 
 void CCStrobe(char addr)
 {
-	char result;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	spi_write_single(&SPIC, addr);

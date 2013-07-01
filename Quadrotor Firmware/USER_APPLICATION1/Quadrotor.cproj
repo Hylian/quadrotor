@@ -11,9 +11,12 @@
       <framework-data>
   <options>
     <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="common.services.basic.twi" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.basic.spi_master" value="Add" config="standard_spi" content-id="Atmel.ASF" />
+    <option id="common.services.basic.twi" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="xmega.drivers.spi" value="Add" config="" content-id="Atmel.ASF" />
     <option id="xmega.services.pwm" value="Add" config="" content-id="Atmel.ASF" />
+    <option id="xmega.drivers.ioport" value="Add" config="" content-id="Atmel.ASF" />
   </options>
   <configurations>
     <configuration key="config.xmega.drivers.twi.mode" value="both" default="both" content-id="Atmel.ASF" />
@@ -76,6 +79,10 @@
     <file path="src/ASF/xmega/drivers/twi/twis.h" framework="" version="3.8.1" source="xmega\drivers\twi\twis.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/xmega/drivers/twi/twi_common.h" framework="" version="3.8.1" source="xmega\drivers\twi\twi_common.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/Config/conf_twim.h" framework="" version="3.8.1" source="xmega\drivers\twi\module_config\conf_twim.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/ioport/xmega/ioport_compat.c" framework="" version="3.8.1" source="common\services\ioport\xmega\ioport_compat.c" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/ioport/xmega/ioport_compat.h" framework="" version="3.8.1" source="common\services\ioport\xmega\ioport_compat.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/ioport/xmega/ioport.h" framework="" version="3.8.1" source="common\services\ioport\xmega\ioport.h" changed="False" content-id="Atmel.ASF" />
+    <file path="src/ASF/common/services/ioport/ioport.h" framework="" version="3.8.1" source="common\services\ioport\ioport.h" changed="False" content-id="Atmel.ASF" />
   </files>
   <documentation help="http://asf.atmel.com/docs/3.8.1/common.applications.user_application.user_board.xmegaa/html/index.html" />
   <offline-documentation help="" />
@@ -116,6 +123,7 @@
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>BOARD=USER_BOARD</Value>
+      <Value>IOPORT_XMEGA_COMPAT</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -139,6 +147,7 @@
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/twi</Value>
       <Value>../src/ASF/xmega/drivers/twi</Value>
+      <Value>../src/ASF/common/services/ioport</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -171,6 +180,7 @@
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/twi</Value>
       <Value>../src/ASF/xmega/drivers/twi</Value>
+      <Value>../src/ASF/common/services/ioport</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
@@ -191,6 +201,7 @@
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>BOARD=USER_BOARD</Value>
+      <Value>IOPORT_XMEGA_COMPAT</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -214,6 +225,7 @@
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/twi</Value>
       <Value>../src/ASF/xmega/drivers/twi</Value>
+      <Value>../src/ASF/common/services/ioport</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -247,6 +259,7 @@
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/twi</Value>
       <Value>../src/ASF/xmega/drivers/twi</Value>
+      <Value>../src/ASF/common/services/ioport</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
@@ -259,6 +272,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src\ASF\common\boards\user_board\init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\ioport\xmega\ioport.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\ioport\ioport.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\ioport\xmega\ioport_compat.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\ioport\xmega\ioport_compat.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\radioCore.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\radioCore.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\SPICfg.c">
@@ -457,6 +488,8 @@
     <Folder Include="src\ASF\common\services\" />
     <Folder Include="src\ASF\common\services\clock\" />
     <Folder Include="src\ASF\common\services\clock\xmega\" />
+    <Folder Include="src\ASF\common\services\ioport\" />
+    <Folder Include="src\ASF\common\services\ioport\xmega\" />
     <Folder Include="src\ASF\common\services\sleepmgr\" />
     <Folder Include="src\ASF\common\services\sleepmgr\xmega\" />
     <Folder Include="src\ASF\common\services\spi\" />

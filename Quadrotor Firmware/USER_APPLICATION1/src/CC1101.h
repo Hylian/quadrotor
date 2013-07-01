@@ -1,3 +1,5 @@
+#include "status_codes.h"
+
 #ifndef _CC1101_H
 #define _CC1101_H 1
 
@@ -98,13 +100,13 @@
 #define CC1101_PACKT_LEN   (CC1101_FIFO_SIZE - 3) // see section 15.3 of the datasheet
 
 void PowerOnStartUp(); // manual power on reset as described in  27.1 of cc1100 datasheet
-void CCRead(char addr, char* data)
-status_code CCReadBurst(char addr, char* dataPtr, char size)
-void CCWrite(char addr, char data)
-status_code CCWriteBurst(char addr, const char* dataPtr, char size)
-void CCStrobe(char addr)
-void CCSetup() // configure registers
-void CCsetPA(char paIndex) // set power amplification using a table
-char CCRSSIdecode(char rssiEnc) // decode RSSI value
+void CCRead(char addr, char* data);
+status_code_t CCReadBurst(char addr, char* dataPtr, char size);
+void CCWrite(char addr, char data);
+status_code_t CCWriteBurst(char addr, const char* dataPtr, char size);
+void CCStrobe(char addr);
+void CCSetup(); // configure registers
+void CCsetPA(char paIndex); // set power amplification using a table
+char CCRSSIdecode(char rssiEnc); // decode RSSI value
 
 #endif
