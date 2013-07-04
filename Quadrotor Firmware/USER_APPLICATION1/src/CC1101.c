@@ -5,53 +5,78 @@
 //http://asf.atmel.com/docs/3.8.1/xmegaa/html/group__xmega__spi__master__group.html
 //Functions need to be modified to be full duplex so we can receive the stat byte
 
-void CCRead(char addr, char* data)
+char CCRead(char addr, char* data)
 {
-	char
+	char stat;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
+	
 	spi_write_single(&SPIC, addr|0x80);
-	spi_read_single(&SPIC, *data);
+	spi_read_single(&SPIC, stat)
+	
+	spi_write_single(&SPIC, CONFIG_SPI_MASTER_DUMMY);
+	spi_read_single(&SPIC, data);
+	
 	spi_deselect_device(&SPIC, &spi_device_conf);
+	return stat;
 };
 
-status_code_t CCReadBurst(char addr, char* dataPtr, char size)
+char CCReadBurst(char addr, char* dataPtr, char size)
 {
-	status_code_t result;
+	char stat;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
+	
 	spi_write_single(&SPIC, addr|0xC0);
-	result = spi_read_packet(&SPIC, *dataPtr, size);	
+	spi_read_single(&SPIC, stat);
+	
+	spi_read_packet(&SPIC, dataPtr, size);	
+	
 	spi_deselect_device(&SPIC, &spi_device_conf);
-	return result;
+	return stat;
 }
 
-void CCWrite(char addr, char data)
+char CCWrite(char addr, char data)
 {
+	char stat;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
+	
 	spi_write_single(&SPIC, addr);
+	spi_read_single(&SPIC, stat);
+	
 	spi_write_single(&SPIC, data);
+	
 	spi_deselect_device(&SPIC, &spi_device_conf);
+	return stat;
 }
 
-status_code_t CCWriteBurst(char addr, const char* dataPtr, char size)
+char CCWriteBurst(char addr, const char* dataPtr, char size)
 {
-	status_code_t result;
+	char stat;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
+	
 	spi_write_single(&SPIC, addr|0x40);
-	result = spi_write_packet(&SPIC, *dataPtr, size);	
+	spi_read_single(&SPIC, stat);
+	
+	spi_write_packet(&SPIC, *dataPtr, size);	
+	
 	spi_deselect_device(&SPIC, &spi_device_conf);
-	return result;
+	return stat;
 }
 
-void CCStrobe(char addr)
+char CCStrobe(char addr)
 {
+	char stat;
 	spi_select_device(&SPIC, &spi_device_conf);
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
+	
 	spi_write_single(&SPIC, addr);
+	spi_read_single(&SPIC, stat);
+	
 	spi_deselect_device(&SPIC, &spi_device_conf);	
+	return stat;
 }
 
 void CCSetup()
