@@ -1,0 +1,1 @@
+void twi_init(void);
