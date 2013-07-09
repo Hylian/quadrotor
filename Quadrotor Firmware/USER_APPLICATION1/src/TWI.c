@@ -1,6 +1,6 @@
 #include "TWI.h"
 
-status_code_t twiWrite(char writeAddress, char busAddress, char* dataPtr, char length)
+status_code_t twiWrite(char busAddress, char writeAddress, char* dataPtr, char length)
 {
 	twi_package_t packet_write =
 	{
@@ -14,7 +14,7 @@ status_code_t twiWrite(char writeAddress, char busAddress, char* dataPtr, char l
 	return twi_master_write(&TWIM0, packet_write);
 }
 
-status_code_t twiRead(char readAddress, char busAddress, char* dataPtr, char length)
+status_code_t twiRead(char busAddress, char readAddress, char* dataPtr, char length)
 {
 	twi_package_t packet_read =
 	{
