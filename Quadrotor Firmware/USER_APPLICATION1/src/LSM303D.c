@@ -11,7 +11,7 @@ void accelSetup(void)
 	twi_init();
 	#endif
 	
-	while(twiWrite(ACCEL_ADDR, CTRL1, 0b01110111, 1) != STATUS_OK);
+	while(twiWrite(ACCEL_ADDR, CTRL1, 0x77, 1) != STATUS_OK);
 	/*
 		Datasheet Page: 35
 		AODR (Data Rate Selection): 200 Hz

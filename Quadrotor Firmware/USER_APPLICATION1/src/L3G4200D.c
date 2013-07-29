@@ -8,7 +8,7 @@ void gyroSetup(void)
 	#define _TWI_INITIALIZED
 	twi_init();
 	#endif
-	twiWrite(GYRO_ADDR, CTRL_REG1, 0b01011111, 1);
+	twiWrite(GYRO_ADDR, CTRL_REG1, 0x5F, 1);
 	/*
 		Datasheet Page: 29
 		ODR: 200 Hz
