@@ -8,7 +8,7 @@ status_code_t twiWrite(char busAddress, char writeAddress, char data, char lengt
 		.addr			= writeAddress,
 		.addr_length	= sizeof (uint16_t),
 		.chip			= busAddress;
-		.buffer			= *data,
+		.buffer			= *temp_data,
 		.length			= length
 	};
 	
