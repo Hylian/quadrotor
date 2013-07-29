@@ -13,7 +13,7 @@
 #define OUT_Y_H_M		0x0B
 #define OUT_Z_L_M		0x0C
 #define OUT_Z_H_M		0x0D
-#define WHO_AM_I		0x0F
+#define WHO_AM_I_G		0x0F
 #define INT_CTRL_M		0x12
 #define INT_SRC_M		0x13
 #define INT_THS_L_M		0x14

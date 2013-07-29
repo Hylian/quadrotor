@@ -4,7 +4,7 @@
 #define GYRO_ADDR 0xD1
 
 /* Register Definitions */
-#define WHO_AM_I		0x0F
+#define WHO_AM_I_A		0x0F
 #define CTRL_REG1		0x20
 #define CTRL_REG2		0x21
 #define CTRL_REG3		0x22
