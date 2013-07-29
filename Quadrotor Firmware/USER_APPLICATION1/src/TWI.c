@@ -2,13 +2,12 @@
 
 status_code_t twiWrite(char busAddress, char writeAddress, char data, char length)
 {
-	char temp_data = data;
 	twi_package_t packet_write =
 	{
 		.addr			= writeAddress,
 		.addr_length	= sizeof (uint16_t),
 		.chip			= busAddress;
-		.buffer			= *temp_data,
+		.buffer			= &data,
 		.length			= length
 	};
 	
