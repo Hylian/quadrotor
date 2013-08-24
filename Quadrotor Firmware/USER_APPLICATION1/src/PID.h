@@ -10,8 +10,8 @@ struct PIDobject
 	double outMin, outMax;
 };
 
-void computePID(PIDobject p, double Input);
-void SetTunings(PIDobject p, double Kp, double Ki, double Kd);
-void SetOutputLimits(PIDobject p, double Min, double Max);
+void computePID(PIDobject* p, double Input);
+void SetTunings(PIDobject* p, double Kp, double Ki, double Kd);
+void SetOutputLimits(PIDobject* p, double Min, double Max);
 
 #endif
