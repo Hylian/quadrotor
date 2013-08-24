@@ -10,6 +10,7 @@
 #include "L3G4200D.h"
 #include "radioCore.h"
 #include "kalman.h"
+#include "radioCommand.h"
 
 #define ACCEL_SCALE 1
 #define GYRO_SCALE 1
@@ -63,14 +64,15 @@ int main (void)
 			computePID(yPID, yangle);
 			
 			//Update Motors
-			setMotorSpeed(MotorD0, 50+xPID.Output);
-			setMotorSpeed(MotorD1, 50-xPID.Output);
-			setMotorSpeed(MotorE0, 50+yPID.Output);
-			setMotorSpeed(MotorE1, 50-yPID.Output);
+			setMotorSpeed(MotorD0, /*50+*/xPID.Output);
+			setMotorSpeed(MotorD1, /*50-*/xPID.Output);
+			setMotorSpeed(MotorE0, /*50+*/yPID.Output);
+			setMotorSpeed(MotorE1, /*50-*/yPID.Output);
 		}
 		if(/*radio update*/)
 		{
-			//Process radio packet
+			
+			processCommand(/*payload*/, /*bytes*/, xPID, yPID, )
 		}
 	}
 	
