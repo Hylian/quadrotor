@@ -25,6 +25,7 @@ int main (void)
 	
 	int xangletemp, yangletemp, zangletemp, xratetemp, yratetemp, zratetemp;
 	double roll, pitch;
+	int throttle;
 	
 	struct PIDobject xPID;
 	struct PIDobject yPID;
@@ -33,10 +34,10 @@ int main (void)
 	//TODO: Find the value for these
 	SetTunings(xPID, 5, 0, 0);
 	SetTunings(yPID, 5, 0, 0);
-	SetOutputLimits(xPID, 0, 100);
-	SetOutputLimits(yPID, 0, 100);
+	SetOutputLimits(xPID, -20, 20);
+	SetOutputLimits(yPID, -20, 20);
 	
-	for(;;)
+	while(1)
 	{
 		if(/*control update*/)
 		{
@@ -64,10 +65,10 @@ int main (void)
 			computePID(yPID, yangle);
 			
 			//Update Motors
-			setMotorSpeed(MotorD0, /*50+*/xPID.Output);
-			setMotorSpeed(MotorD1, /*50-*/xPID.Output);
-			setMotorSpeed(MotorE0, /*50+*/yPID.Output);
-			setMotorSpeed(MotorE1, /*50-*/yPID.Output);
+			setMotorSpeed(MotorD0, throttle + xPID.Output);
+			setMotorSpeed(MotorD1, throttle - xPID.Output);
+			setMotorSpeed(MotorE0, throttle + yPID.Output);
+			setMotorSpeed(MotorE1, throttle - yPID.Output);
 		}
 		if(/*radio update*/)
 		{

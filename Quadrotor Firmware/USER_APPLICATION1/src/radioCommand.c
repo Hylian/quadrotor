@@ -8,7 +8,7 @@ union char2double
 */
 void processCommand(char* payload, char bytes, PIDobject* xPID, PIDobject* yPID, char* throttle)
 {
-	switch(&payload)
+	switch(*payload)
 	{
 		case RADIO_CONTROL:
 			&xPID.Setpoint = (double) &(payload+1);

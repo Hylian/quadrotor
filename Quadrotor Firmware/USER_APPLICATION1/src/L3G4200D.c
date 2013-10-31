@@ -22,7 +22,7 @@ void gyroRead(int* xPtr, int* yPtr, int* zPtr)
 {
 	char temp_data[6];
 	while(twiRead(GYRO_ADDR, OUT_X_L, &temp_data, 6) != STATUS_OK);
-	&xPtr = temp_data[0] + temp_data[1] * 256;
-	&yPtr = temp_data[2] + temp_data[3] * 256;
-	&zPtr = temp_data[4] + temp_data[5] * 256;
+	*xPtr = temp_data[0] + temp_data[1] * 256;
+	*yPtr = temp_data[2] + temp_data[3] * 256;
+	*zPtr = temp_data[4] + temp_data[5] * 256;
 }

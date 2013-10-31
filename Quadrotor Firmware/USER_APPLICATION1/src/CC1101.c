@@ -12,7 +12,7 @@ char CCRead(char addr, char* data)
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	
 	spi_write_single(&SPIC, addr|0x80);
-	spi_read_single(&SPIC, stat)
+	spi_read_single(&SPIC, &stat)
 	
 	spi_write_single(&SPIC, CONFIG_SPI_MASTER_DUMMY);
 	spi_read_single(&SPIC, data);
@@ -28,7 +28,7 @@ char CCReadBurst(char addr, char* dataPtr, char size)
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	
 	spi_write_single(&SPIC, addr|0xC0);
-	spi_read_single(&SPIC, stat);
+	spi_read_single(&SPIC, &stat);
 	
 	spi_read_packet(&SPIC, dataPtr, size);	
 	
@@ -43,7 +43,7 @@ char CCWrite(char addr, char data)
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	
 	spi_write_single(&SPIC, addr);
-	spi_read_single(&SPIC, stat);
+	spi_read_single(&SPIC, &stat);
 	
 	spi_write_single(&SPIC, data);
 	
@@ -58,7 +58,7 @@ char CCWriteBurst(char addr, const char* dataPtr, char size)
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	
 	spi_write_single(&SPIC, addr|0x40);
-	spi_read_single(&SPIC, stat);
+	spi_read_single(&SPIC, &stat);
 	
 	spi_write_packet(&SPIC, *dataPtr, size);	
 	
@@ -73,7 +73,7 @@ char CCStrobe(char addr)
 	while(PORTC.IN&PIN6_bm==PIN6_bm); //Wait for MISO to go low
 	
 	spi_write_single(&SPIC, addr);
-	spi_read_single(&SPIC, stat);
+	spi_read_single(&SPIC, &stat);
 	
 	spi_deselect_device(&SPIC, &spi_device_conf);	
 	return stat;
